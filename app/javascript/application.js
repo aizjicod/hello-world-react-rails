@@ -1,12 +1,20 @@
-// Entry point for the build script in your package.json
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import App from './components/App'
+import { Provider } from 'react-redux';
+import store from './redux/configureStore';
+import { getGreetings } from './redux/reducer/greetings';
 
-function App() {
-  return (<h1>Hello World!</h1>);
-}
+store.dispatch(getGreetings())
 
 ReactDOM.render(
-  <App/>,
+<React.StrictMode>
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
+</React.StrictMode>,
   document.getElementById('root'),
 );
